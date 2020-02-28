@@ -2,15 +2,6 @@ package com.qa.pom.base;
 
 import com.qa.pom.pages.Login;
 import com.qa.pom.utils.YamlParser;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +15,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BaseTest {
 
     public Actions actions;
@@ -36,16 +35,16 @@ public class BaseTest {
     @Rule public RunTestRules runTestRules = new RunTestRules(this);
 
     /** Constructor */
-    public BaseTest()  {
+    public BaseTest() {
 
         // Clear Directories
-        clearDirectories ();
+        clearDirectories();
         // Logger
         logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
         ChromeOptions options = new ChromeOptions();
 
-        /** Collection with settings of browser*/
+        /** Collection with settings of browser */
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
@@ -54,7 +53,7 @@ public class BaseTest {
                 "excludeSwitches", Collections.singletonList("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
 
-        /** Options which are disable forgot password pop-up*/
+        /** Options which are disable forgot password pop-up */
         options.setExperimentalOption("prefs", prefs);
         // Initialize path to ChromeDriver
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
@@ -74,9 +73,7 @@ public class BaseTest {
      *
      * @return the instance of HomePage
      */
-
-
-    protected void clearDirectories () {
+    protected void clearDirectories() {
 
         try {
             FileUtils.cleanDirectory(new File("src/main/resources/screenshots"));
@@ -84,9 +81,7 @@ public class BaseTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
     protected Login openSite() {
         try {
@@ -144,7 +139,6 @@ public class BaseTest {
 
     public void findElementAndClick(String xpath) {
         driver.findElement(By.xpath(xpath)).click();
-
     }
 
     public String findElementAndGetText(String xpath) {

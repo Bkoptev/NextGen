@@ -1,0 +1,40 @@
+{
+"18.52": {
+    "expected": {
+        "nameOfFormula": "Body Mass Index (BMI)",
+        "value": "18.52",
+        "description": "kg / m²"
+    },
+    "data": {
+        "iK1ab": 180,
+        "iK1bb": 60
+    },"dependencies" : {
+        }
+    
+},
+    "21.6": {
+    "expected": {
+        "nameOfFormula": "Body Mass Index (BMI)",
+        "value": "21.6",
+        "description": "kg / m²"
+    },
+    "data": {
+        "iK1ab": 180,
+        "iK1bb": 70
+    },"dependencies" : {
+        }
+
+},
+    "24.69": {
+    "expected": {
+        "nameOfFormula": "Body Mass Index (BMI)",
+        "value": "24.69",
+        "description": "kg / m²"
+    },
+    "data": {
+        "iK1ab": 180,
+        "iK1bb": 80
+    },"dependencies" : {
+        }
+}
+}
