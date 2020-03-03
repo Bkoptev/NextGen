@@ -5,6 +5,7 @@ import com.qa.pom.utils.YamlParser;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.parser.JSONParser;
 import org.junit.Rule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,7 +30,7 @@ public class BaseTest {
     private WebDriver driver;
     private WebDriverWait wait;
     public Logger logger;
-    // public JsonParser jsonParser;
+    public JSONParser jsonParser;
     // Logger
 
     // Rule
@@ -67,6 +68,8 @@ public class BaseTest {
         wait = new WebDriverWait(driver, 20);
 
         actions = new Actions(driver);
+
+        jsonParser = new JSONParser();
     }
 
     /**

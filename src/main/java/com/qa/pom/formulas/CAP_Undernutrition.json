@@ -10,7 +10,8 @@
         },
         "dependencies" : {
             "SCALE_BMI" : "24.69"
-        }
+        },
+        "set" : "small"
 
     },
     "1": {

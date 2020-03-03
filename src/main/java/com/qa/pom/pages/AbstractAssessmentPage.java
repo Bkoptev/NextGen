@@ -3,7 +3,6 @@ package com.qa.pom.pages;
 import com.qa.pom.base.BaseTest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -34,9 +33,19 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
     @FindBy(xpath = "//button[@class='modal-close']")
     WebElement closeFormulasPage;
 
+    public JSONObject assessmentMap;
+
     /** Constructor */
     AbstractAssessmentPage(BaseTest testClass) {
         super(testClass);
+    }
+
+    public void setAssessmentMap (JSONObject assessmentMap) {
+        this.assessmentMap = assessmentMap;
+    }
+
+    public JSONObject getAssessmentMap() {
+        return this.assessmentMap;
     }
 
     public void scrollToTop() {
@@ -137,6 +146,12 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
         testClass.log("TextField: " + varName + " Text: " + value + " filled");
     }
 
+    /**
+     *
+     *
+     * @param varName element which will be populated with value
+     * @param value value which should be chosen
+     */
     public void fillElement(String varName, String value) {
         WebElement element =
                 testClass.getDriver().findElement(By.xpath("//div[@varname='" + varName + "']"));
@@ -165,22 +180,18 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
         }
     }
 
-    public void findAndGoToElement(String varname, String value, String assessmentMap)
-            throws IOException, ParseException {
+    /**
+     * Find element is assessment map and procced to it through proper supplement and section
+     *
+     * @param varname element which will be found in map af assessment and then go to
+     * @param value value  of element which should be chosen
+     */
+    public void findAndGoToElement(String varname, String value) {
         String assessmentName = "";
         String sectionName = "";
-        Object object =
-                new JSONParser()
-                        .parse(
-                                new FileReader(
-                                        "src/main/java/com/qa/pom/maps/"
-                                                + assessmentMap
-                                                + ".json"));
-        JSONObject mapJson = (JSONObject) object;
-
         outerloop:
-        for (Object suppKey : mapJson.keySet()) {
-            JSONObject section = (JSONObject) mapJson.get(suppKey);
+        for (Object suppKey : this.assessmentMap.keySet()) {
+            JSONObject section = (JSONObject) this.assessmentMap.get(suppKey);
             for (Object sectionKey : section.keySet()) {
                 JSONArray varnames = (JSONArray) section.get(sectionKey);
                 if (varnames.contains(varname)) {
@@ -195,11 +206,19 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
         fillElement(varname, value);
     }
 
-    public void formulaCalculation(String formulaName, String formulaValue, String map)
+    /**
+     *
+     *
+     * @param formulaName name of formula which is currently calculating
+     *
+     * @param formulaValue value of formula which is currently calculating
+     * @throws IOException
+     * @throws ParseException
+     */
+    public void formulaCalculation(String formulaName, String formulaValue)
             throws IOException, ParseException {
         Object object =
-                new JSONParser()
-                        .parse(
+                testClass.jsonParser.parse(
                                 new FileReader(
                                         "src/main/java/com/qa/pom/formulas/"
                                                 + formulaName
@@ -223,16 +242,9 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                                     .keySet()
                                     .forEach(
                                             varname -> {
-                                                try {
-                                                    findAndGoToElement(
-                                                            varname.toString(),
-                                                            teststeps.get(varname).toString(),
-                                                            map);
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                } catch (ParseException e) {
-                                                    e.printStackTrace();
-                                                }
+                                                findAndGoToElement(
+                                                        varname.toString(),
+                                                        teststeps.get(varname).toString());
                                             });
                             JSONObject dependency = (JSONObject) testCase.get("dependencies");
                             if (!dependency.isEmpty()) {
@@ -245,8 +257,7 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                                                                 dependencyName.toString(),
                                                                 dependency
                                                                         .get(dependencyName)
-                                                                        .toString(),
-                                                                map);
+                                                                        .toString());
                                                     } catch (IOException e) {
                                                         e.printStackTrace();
                                                     } catch (ParseException e) {

@@ -22,8 +22,8 @@ public class AcutenetTestChaChaFSFormulasCAPs extends BaseTest {
         log("On Pathways");
         InterRAIChaFsMh interRAIChaFsMh = pathways.chooseInterraiChaFsMh();
         interRAIChaFsMh.fillElement("FS", "1");
-        interRAIChaFsMh.formulaCalculation("CAP_Undernutrition", "All", "InterRAIChaFsMh");
-        interRAIChaFsMh.formulaCalculation("SCALE_Communication", "All", "InterRAIChaFsMh");
+        interRAIChaFsMh.formulaCalculation("CAP_Undernutrition", "All");
+        interRAIChaFsMh.formulaCalculation("SCALE_Communication", "All");
         Thread.sleep(10000);
         closeSite();
     }
