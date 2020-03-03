@@ -9,7 +9,7 @@
             "iJ6c": "0"
         },
         "dependencies" : {
-            "SCALE_BMI" : "18.52"
+            "SCALE_BMI" : "24.69"
         }
 
     },
@@ -37,7 +37,7 @@
             "iJ6c": "0"
         },
         "dependencies" : {
-            "SCALE_BMI" : "24.69"
+            "SCALE_BMI" : "18.52"
         }
     }
 }

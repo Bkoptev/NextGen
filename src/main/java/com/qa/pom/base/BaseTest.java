@@ -29,6 +29,7 @@ public class BaseTest {
     private WebDriver driver;
     private WebDriverWait wait;
     public Logger logger;
+    // public JsonParser jsonParser;
     // Logger
 
     // Rule

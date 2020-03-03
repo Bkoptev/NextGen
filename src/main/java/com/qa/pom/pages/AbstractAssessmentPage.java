@@ -1,6 +1,7 @@
 package com.qa.pom.pages;
 
 import com.qa.pom.base.BaseTest;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,8 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public abstract class AbstractAssessmentPage extends AbstractPage {
-
-
 
     @FindBy(xpath = "//div[@class='assessment-supplement-box']//..")
     WebElement zIndex;
@@ -63,6 +62,7 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                             + "']");
             testClass.waitTillElementIsVisible(loadingWrapper);
             testClass.waitTillElementNotVisible(wrapXpath);
+            testClass.log("Go to " + nameOfSection);
         }
     }
 
@@ -82,6 +82,7 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                             + "']");
             testClass.waitTillElementIsVisible(loadingWrapper);
             testClass.waitTillElementNotVisible(wrapXpath);
+            testClass.log("Go to " + nameOfSupp);
         }
     }
 
@@ -96,61 +97,95 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                 "//div[@varname='" + varName + "']//a[@element-action='clear']");
     };
 
+    public void fillRadioButton(String varName, String value) {
+        try {
+            testClass.findElementAndClick(
+                    "//div[@varname='" + varName + "']//label[@value='" + value + "']");
+        } catch (Exception e) {
+            scrollToTop();
+            testClass.findElementAndClick(
+                    "//div[@varname='" + varName + "']//label[@value='" + value + "']");
+        }
+    }
+
+    public void fillDropdown(String varName, String value) {
+        try {
+            testClass.findElementAndClick(
+                    "//div[@varname='" + varName + "']//button[@type='button']");
+        } catch (Exception e) {
+            scrollToTop();
+            testClass.findElementAndClick(
+                    "//div[@varname='" + varName + "']//button[@type='button']");
+        }
+        testClass.waitTillXpathElementIsVisible(
+                "//div[@varname='" + varName + "']//button[@aria-expanded='true']");
+        testClass.findElementAndClick(
+                "//div[@varname='" + varName + "']//li[@data-original-index='" + value + "']");
+        testClass.waitTillElementNotVisible(
+                "//div[@varname='" + varName + "']//button[@aria-expanded='true']");
+        testClass.log("Dropdown: " + varName + " Value: " + value + " filled");
+    }
+
+    public void fillInput(String varName, String value) {
+        elementClear(varName);
+        try {
+            testClass.findElementAndSendKeys("//div[@varname='" + varName + "']//input", value);
+        } catch (Exception e) {
+            scrollToTop();
+            testClass.findElementAndSendKeys("//div[@varname='" + varName + "']//input", value);
+        }
+        testClass.log("TextField: " + varName + " Text: " + value + " filled");
+    }
+
     public void fillElement(String varName, String value) {
         WebElement element =
                 testClass.getDriver().findElement(By.xpath("//div[@varname='" + varName + "']"));
         // Fill radiobutton
-        if (element.findElements(By.xpath("//div[@varname='" + varName + "']//div[contains(@class,'checkbox')]")).size() > 0) {
-            try {
-                testClass.findElementAndClick(
-                        "//div[@varname='" + varName + "']//label[@value='" + value + "']");
-            } catch (Exception e) {
-                scrollToTop();
-                testClass.findElementAndClick(
-                        "//div[@varname='" + varName + "']//label[@value='" + value + "']");
-            }
-            testClass.log("Radiobutton: " + varName + " Value: " + value + " filled");
+        if (element.findElements(
+                                By.xpath(
+                                        "//div[@varname='"
+                                                + varName
+                                                + "']//div[contains(@class,'checkbox')]"))
+                        .size()
+                > 0) {
+            fillRadioButton(varName, value);
             // Fill dropdown
-        } else if (element.findElements(By.xpath("//div[@varname='" + varName + "']//button[@data-toggle='dropdown']")).size() > 0) {
-            try {
-                testClass.findElementAndClick(
-                        "//div[@varname='" + varName + "']//button[@type='button']");
-            } catch (Exception e) {
-                scrollToTop();
-                testClass.findElementAndClick(
-                        "//div[@varname='" + varName + "']//button[@type='button']");
-            }
-            testClass.waitTillXpathElementIsVisible(
-                    "//div[@varname='" + varName + "']//button[@aria-expanded='true']");
-            testClass.findElementAndClick(
-                    "//div[@varname='" + varName + "']//li[@data-original-index='" + value + "']");
-            testClass.waitTillElementNotVisible(
-                    "//div[@varname='" + varName + "']//button[@aria-expanded='true']");
-            testClass.log("Dropdown: " + varName + " Value: " + value + " filled");
+        } else if (element.findElements(
+                                By.xpath(
+                                        "//div[@varname='"
+                                                + varName
+                                                + "']//button[@data-toggle='dropdown']"))
+                        .size()
+                > 0) {
+            fillDropdown(varName, value);
             // Fill input
-        } else if (element.findElements(By.xpath("//div[@varname='" + varName + "']//input")).size() > 0) {
-            try {
-                testClass.findElementAndSendKeys("//div[@varname='" + varName + "']//input", value);
-            } catch (Exception e) {
-                scrollToTop();
-                testClass.findElementAndSendKeys("//div[@varname='" + varName + "']//input", value);
-            }
-            testClass.log("TextField: " + varName + " Text: " + value + " filled");
+        } else if (element.findElements(By.xpath("//div[@varname='" + varName + "']//input")).size()
+                > 0) {
+            fillInput(varName, value);
         }
     }
 
-    public void goToAndFillElement(String varname, String value , String[][] assessment) {
+    public void findAndGoToElement(String varname, String value, String assessmentMap)
+            throws IOException, ParseException {
         String assessmentName = "";
         String sectionName = "";
-        testClass.log(varname);
+        Object object =
+                new JSONParser()
+                        .parse(
+                                new FileReader(
+                                        "src/main/java/com/qa/pom/maps/"
+                                                + assessmentMap
+                                                + ".json"));
+        JSONObject mapJson = (JSONObject) object;
+
         outerloop:
-        for (int i = 0; i < assessment.length; i++) {
-            for (int j = 0; j < assessment[i].length; j++) {
-                if (varname.equals(assessment[i][j])) {
-                    assessmentName = assessment[i][0];
-                    sectionName = assessment[i][1];
-                    testClass.log(assessmentName);
-                    testClass.log(sectionName);
+        for (Object suppKey : mapJson.keySet()) {
+            JSONObject section = (JSONObject) mapJson.get(suppKey);
+            for (Object sectionKey : section.keySet()) {
+                JSONArray varnames = (JSONArray) section.get(sectionKey);
+                if (varnames.contains(varname)) {
+                    assessmentName = suppKey.toString();
+                    sectionName = sectionKey.toString();
                     break outerloop;
                 }
             }
@@ -160,41 +195,80 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
         fillElement(varname, value);
     }
 
-    public void formulaCalculation(String formulaName, String dependencyValue, String[][] map)
+    public void formulaCalculation(String formulaName, String formulaValue, String map)
             throws IOException, ParseException {
-        Object obj = new JSONParser().parse(new FileReader("src/main/java/com/qa/pom/formulas/" + formulaName + ".json"));
-        JSONObject formulaJson = (JSONObject) obj;
+        Object object =
+                new JSONParser()
+                        .parse(
+                                new FileReader(
+                                        "src/main/java/com/qa/pom/formulas/"
+                                                + formulaName
+                                                + ".json"));
+        JSONObject formulaJson = (JSONObject) object;
 
-        if (dependencyValue != "True"){
-            JSONObject formulaTestCase = (JSONObject) formulaJson.get(dependencyValue);
+        if (formulaValue != "All") {
+            JSONObject formulaTestCase = (JSONObject) formulaJson.get(formulaValue);
             formulaJson.clear();
-            formulaJson.put(dependencyValue, formulaTestCase);
+            formulaJson.put(formulaValue, formulaTestCase);
         }
 
-        formulaJson.keySet().forEach(key ->{
-            JSONObject testCase = (JSONObject) formulaJson.get(key);
-            JSONObject teststeps = (JSONObject) testCase.get("data");
-            teststeps.keySet().forEach(varname -> {
-                goToAndFillElement(varname.toString(), teststeps.get(varname).toString(), map);
-            });
-            JSONObject dependency = (JSONObject) testCase.get("dependencies");
-            if (!dependency.isEmpty()){
-                dependency.keySet().forEach(dependencyName -> {
-                    try {
-                        formulaCalculation(dependencyName.toString(), dependency.get(dependencyName).toString(), map);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-            JSONObject expected = (JSONObject) testCase.get("expected");
-            testClass.log(expected.get("nameOfFormula").toString());
-            testClass.log(expected.get("value").toString());
-            testClass.log(expected.get("description").toString());
-            checkCapTrigger(expected.get("nameOfFormula").toString(), expected.get("value").toString(), expected.get("description").toString());
-        });
+        formulaJson
+                .keySet()
+                .forEach(
+                        key -> {
+                            JSONObject testCase = (JSONObject) formulaJson.get(key);
+                            JSONObject teststeps = (JSONObject) testCase.get("data");
+
+                            teststeps
+                                    .keySet()
+                                    .forEach(
+                                            varname -> {
+                                                try {
+                                                    findAndGoToElement(
+                                                            varname.toString(),
+                                                            teststeps.get(varname).toString(),
+                                                            map);
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            });
+                            JSONObject dependency = (JSONObject) testCase.get("dependencies");
+                            if (!dependency.isEmpty()) {
+                                dependency
+                                        .keySet()
+                                        .forEach(
+                                                dependencyName -> {
+                                                    try {
+                                                        formulaCalculation(
+                                                                dependencyName.toString(),
+                                                                dependency
+                                                                        .get(dependencyName)
+                                                                        .toString(),
+                                                                map);
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                });
+                            }
+                            if (formulaValue == "All") {
+                                JSONObject expected = (JSONObject) testCase.get("expected");
+                                if (formulaName.contains("CAP")) {
+                                    checkCapTrigger(
+                                            expected.get("nameOfFormula").toString(),
+                                            expected.get("value").toString(),
+                                            expected.get("description").toString());
+                                } else {
+                                    checkScaleTrigger(
+                                            expected.get("nameOfFormula").toString(),
+                                            expected.get("value").toString(),
+                                            expected.get("description").toString());
+                                }
+                            }
+                        });
     }
 
     public void checkCapTrigger(

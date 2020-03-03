@@ -1,0 +1,128 @@
+{
+   "0":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"0 out of 8",
+         "description":"Intact"
+      },
+      "data":{
+         "iD1":0,
+         "iD2":0
+      },
+      "dependencies":{
+
+      }
+   },
+   "1":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"1 out of 8",
+         "description":"Borderline intact"
+      },
+      "data":{
+         "iD1":1,
+         "iD2":0
+      },
+      "dependencies":{
+
+      }
+   },
+   "2":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"2 out of 8",
+         "description":"Mild impairment"
+      },
+      "data":{
+         "iD1":2,
+         "iD2":0
+      },
+      "dependencies":{
+
+      }
+   },
+   "3":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"3 out of 8",
+         "description":"Mild/moderate impairment"
+      },
+      "data":{
+         "iD1":3,
+         "iD2":0
+      },
+      "dependencies":{
+
+      }
+   },
+   "4":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"4 out of 8",
+         "description":"Moderate impairment"
+      },
+      "data":{
+         "iD1":4,
+         "iD2":0
+      },
+      "dependencies":{
+
+      }
+   },
+   "5":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"5 out of 8",
+         "description":"Moderate/severe impairment"
+      },
+      "data":{
+         "iD1":4,
+         "iD2":1
+      },
+      "dependencies":{
+
+      }
+   },
+   "6":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"6 out of 8",
+         "description":"Severe impairment"
+      },
+      "data":{
+         "iD1":4,
+         "iD2":2
+      },
+      "dependencies":{
+
+      }
+   },
+   "7":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"7 out of 8",
+         "description":"Severe/very severe impairment"
+      },
+      "data":{
+         "iD1":4,
+         "iD2":3
+      },
+      "dependencies":{
+
+      }
+   },
+   "8":{
+      "expected":{
+         "nameOfFormula":"Communication Scale (CS)",
+         "value":"8 out of 8",
+         "description":"Very severe impairment"
+      },
+      "data":{
+         "iD1":4,
+         "iD2":4
+      },
+      "dependencies":{
+
+      }
+   }
+}

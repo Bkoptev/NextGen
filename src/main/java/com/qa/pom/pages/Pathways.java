@@ -42,7 +42,7 @@ public class Pathways extends AbstractPage {
         testClass.waitTillElementIsVisible(startNewAssessment);
     }
 
-    public InterraiChaFsMh chooseInterraiChaFsMh() {
+    public InterRAIChaFsMh chooseInterraiChaFsMh() {
 
         testClass.sizeConditionInprogressElementPresent(
                 detectInprogress,
@@ -60,6 +60,6 @@ public class Pathways extends AbstractPage {
         testClass.waitTillElementIsVisible(loadingWrapper);
         testClass.waitTillElementNotVisible(wrapXpath);
         goToTheCHAAsessmentType.click();
-        return new InterraiChaFsMh(testClass);
+        return new InterRAIChaFsMh(testClass);
     }
 }
