@@ -1,0 +1,49 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Communication CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iC1": 0,
+            "iD1": 0,
+            "iD2": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Communication CAP",
+            "value": "1",
+            "description": "Triggered - potential for improvement"
+         },
+         "data": {
+            "iC1": 1,
+            "iD1": 4,
+            "iD2": 3
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Communication CAP",
+            "value": "2",
+            "description": "Triggered - risk of decline"
+         },
+         "data": {
+            "iC1": 2,
+            "iD1": 2,
+            "iD2": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

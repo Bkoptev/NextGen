@@ -1,0 +1,79 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Dehydration CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iJ2c": 0,
+            "iJ2k": 0,
+            "iJ2l": 0,
+            "iJ2n": 0,
+            "iK2a": 0,
+            "iK2c": 0,
+            "iK2b": 0,
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iJ2q": 0
+
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Dehydration CAP",
+            "value": "1",
+            "description": "Triggered - low level"
+         },
+         "data": {
+            "iJ2c": 0,
+            "iJ2k": 0,
+            "iJ2l": 0,
+            "iJ2n": 0,
+            "iK2a": 0,
+            "iK2c": 0,
+            "iK2b": 1,
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iJ2q": 0
+            
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Dehydration CAP",
+            "value": "2",
+            "description": "Triggered - high level"
+         },
+         "data": {
+            "iJ2c": 1,
+            "iJ2k": 0,
+            "iJ2l": 0,
+            "iJ2n": 0,
+            "iK2a": 0,
+            "iK2c": 0,
+            "iK2b": 1,
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iJ2q": 0
+            
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

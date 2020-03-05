@@ -1,44 +1,48 @@
 {
-    "0": {
-        "expected": {
-            "nameOfFormula": "Undernutrition CAP",
-            "value": "0",
-            "description": "Not triggered"
+    "preconditions": [
+        "fsTriggered"
+    ],
+    "testCases": {
+        "0": {
+            "expected": {
+                "nameOfFormula": "Undernutrition CAP",
+                "value": "0",
+                "description": "Not triggered"
+            },
+            "data": {
+                "iJ6c": "0"
+            },
+            "dependencies": {
+                "SCALE_BMI": "24.69"
+            },
+            "set": "small"
         },
-        "data": {
-            "iJ6c": "0"
+        "1": {
+            "expected": {
+                "nameOfFormula": "Undernutrition CAP",
+                "value": "1",
+                "description": "Triggered - risk"
+            },
+            "data": {
+                "iJ6c": "0"
+            },
+            "dependencies": {
+                "SCALE_BMI": "21.6"
+            }
         },
-        "dependencies" : {
-            "SCALE_BMI" : "24.69"
-        },
-        "set" : "small"
-
-    },
-    "1": {
-        "expected": {
-            "nameOfFormula": "Undernutrition CAP",
-            "value": "1",
-            "description": "Triggered - risk"
-        },
-        "data": {
-            "iJ6c": "0"
-        },
-        "dependencies" : {
-            "SCALE_BMI" : "21.6"
-        }
-
-    },
-    "2": {
-        "expected": {
-            "nameOfFormula": "Undernutrition CAP",
-            "value": "2",
-            "description": "Triggered - high risk"
-        },
-        "data": {
-            "iJ6c": "0"
-        },
-        "dependencies" : {
-            "SCALE_BMI" : "18.52"
+        "2": {
+            "expected": {
+                "nameOfFormula": "Undernutrition CAP",
+                "value": "2",
+                "description": "Triggered - high risk"
+            },
+            "data": {
+                "iJ6c": "0"
+            },
+            "dependencies": {
+                "SCALE_BMI": "18.52"
+            }
         }
     }
 }
+

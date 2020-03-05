@@ -1,0 +1,82 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Bowel Conditions CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iC1": 0,
+            "iH1": 0,
+            "iI1a": 0,
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iG2h": 0,
+            "iG2i": 0,
+            "iG2j": 0,
+            "iG7b": 0,
+            "iH3": 0,
+            "iI1q": 0,
+            "iR2": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Bowel Conditions CAP",
+            "value": "1",
+            "description": "Triggered - risk of decline"
+         },
+         "data": {
+            "iC1": 0,
+            "iH1": 0,
+            "iI1a": 0,
+            "iC3a": 2,
+            "iC3b": 2,
+            "iC3c": 0,
+            "iC4": 0,
+            "iG2h": 0,
+            "iG2i": 0,
+            "iG2j": 0,
+            "iG7b": 0,
+            "iH3": 1,
+            "iI1q": 0,
+            "iR2": 0
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Bowel Conditions CAP",
+            "value": "2",
+            "description": "Triggered - facilitate improvement"
+         },
+         "data": {
+            "iC1": 0,
+            "iH1": 0,
+            "iI1a": 0,
+            "iC3a": 2,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iG2h": 0,
+            "iG2i": 0,
+            "iG2j": 0,
+            "iG7b": 0,
+            "iH3": 2,
+            "iI1q": 0,
+            "iR2": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

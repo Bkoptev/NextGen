@@ -1,0 +1,34 @@
+{
+   "preconditions": [
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Cardiorespiratory Conditions CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iJ2c": 0,
+            "iJ2e": 0,
+            "iJ3": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Cardiorespiratory Conditions CAP",
+            "value": "1",
+            "description": "Triggered"
+         },
+         "data": {
+            "iJ2c": 0,
+            "iJ2e": 2,
+            "iJ3": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

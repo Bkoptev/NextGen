@@ -1,0 +1,58 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Behavior CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iE3a": 0,
+            "iE3b": 0,
+            "iE3c": 0,
+            "iE3d": 0,
+            "iE3e": 0,
+            "iE3f": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Behavior CAP",
+            "value": "1",
+            "description": "Triggered - prevent almost daily behavior"
+         },
+         "data": {
+            "iE3a": 2,
+            "iE3b": 1,
+            "iE3c": 0,
+            "iE3d": 1,
+            "iE3e": 0,
+            "iE3f": 1
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Behavior CAP",
+            "value": "2",
+            "description": "Triggered - reduce daily behavior"
+         },
+         "data": {
+            "iE3a": 2,
+            "iE3b": 3,
+            "iE3c": 0,
+            "iE3d": 1,
+            "iE3e": 0,
+            "iE3f": 1
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

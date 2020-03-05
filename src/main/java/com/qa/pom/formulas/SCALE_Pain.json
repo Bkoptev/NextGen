@@ -1,0 +1,71 @@
+{
+   "preconditions": [
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Pain Scale (PS)",
+            "value": "0 out of 4",
+            "description": "No pain"
+         },
+         "data": {
+            "iJ5a": 0,
+            "iJ5b": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Pain Scale (PS)",
+            "value": "1 out of 4",
+            "description": "Less than daily pain"
+         },
+         "data": {
+            "iJ5a": 1,
+            "iJ5b": 0
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Pain Scale (PS)",
+            "value": "2 out of 4",
+            "description": "Daily pain but not severe"
+         },
+         "data": {
+            "iJ5a": 3,
+            "iJ5b": 0
+         },
+         "dependencies": {
+         }
+      },
+      "3": {
+         "expected": {
+            "nameOfFormula": "Pain Scale (PS)",
+            "value": "3 out of 4",
+            "description": "Daily severe pain"
+         },
+         "data": {
+            "iJ5a": 3,
+            "iJ5b": 3
+         },
+         "dependencies": {
+         }
+      },
+      "4": {
+         "expected": {
+            "nameOfFormula": "Pain Scale (PS)",
+            "value": "4 out of 4",
+            "description": "Daily excruciating pain"
+         },
+         "data": {
+            "iJ5a": 3,
+            "iJ5b": 4
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

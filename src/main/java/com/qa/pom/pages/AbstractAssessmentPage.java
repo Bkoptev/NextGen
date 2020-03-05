@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public abstract class AbstractAssessmentPage extends AbstractPage {
 
@@ -33,18 +34,20 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
     @FindBy(xpath = "//button[@class='modal-close']")
     WebElement closeFormulasPage;
 
-    public JSONObject assessmentMap;
+    public JSONArray assessmentMap;
+
+    public boolean isFSEnabled = false;
 
     /** Constructor */
     AbstractAssessmentPage(BaseTest testClass) {
         super(testClass);
     }
 
-    public void setAssessmentMap (JSONObject assessmentMap) {
+    public void setAssessmentMap(JSONArray assessmentMap) {
         this.assessmentMap = assessmentMap;
     }
 
-    public JSONObject getAssessmentMap() {
+    public JSONArray getAssessmentMap() {
         return this.assessmentMap;
     }
 
@@ -147,8 +150,6 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
     }
 
     /**
-     *
-     *
      * @param varName element which will be populated with value
      * @param value value which should be chosen
      */
@@ -184,33 +185,51 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
      * Find element is assessment map and procced to it through proper supplement and section
      *
      * @param varname element which will be found in map af assessment and then go to
-     * @param value value  of element which should be chosen
+     * @param value value of element which should be chosen
      */
     public void findAndGoToElement(String varname, String value) {
         String assessmentName = "";
         String sectionName = "";
+
         outerloop:
-        for (Object suppKey : this.assessmentMap.keySet()) {
-            JSONObject section = (JSONObject) this.assessmentMap.get(suppKey);
-            for (Object sectionKey : section.keySet()) {
-                JSONArray varnames = (JSONArray) section.get(sectionKey);
-                if (varnames.contains(varname)) {
-                    assessmentName = suppKey.toString();
-                    sectionName = sectionKey.toString();
-                    break outerloop;
+        for (Object supplement : this.assessmentMap)
+             {
+                 JSONObject supp = (JSONObject) supplement;
+                 JSONObject sections = (JSONObject) supp.get("sections");
+                for (Object sectionKey : sections.keySet()) {
+                    JSONArray varnames = (JSONArray) sections.get(sectionKey);
+                    if (varnames.contains(varname)) {
+                        assessmentName = supp.get("supp").toString();
+                        sectionName = sectionKey.toString();
+                        break outerloop;
+                    }
                 }
             }
-        }
+
         goToSupplement(assessmentName);
         goToSection(sectionName);
         fillElement(varname, value);
     }
 
+    public void fsTriggered() {
+        if (!isFSEnabled) {
+            goToSupplement("CHA");
+            goToSection("A. IDENTIFICATION");
+            fillElement("FS", "1");
+            isFSEnabled = true;
+        }
+    }
+
+
+    public void callPreconditions (String method) {
+        try {
+            AbstractAssessmentPage.this.getClass().getMethod(method).invoke(AbstractAssessmentPage.this);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
     /**
-     *
-     *
      * @param formulaName name of formula which is currently calculating
-     *
      * @param formulaValue value of formula which is currently calculating
      * @throws IOException
      * @throws ParseException
@@ -219,23 +238,26 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
             throws IOException, ParseException {
         Object object =
                 testClass.jsonParser.parse(
-                                new FileReader(
-                                        "src/main/java/com/qa/pom/formulas/"
-                                                + formulaName
-                                                + ".json"));
+                        new FileReader(
+                                "src/main/java/com/qa/pom/formulas/" + formulaName + ".json"));
+        testClass.log(formulaName + " will be triggered");
         JSONObject formulaJson = (JSONObject) object;
-
-        if (formulaValue != "All") {
-            JSONObject formulaTestCase = (JSONObject) formulaJson.get(formulaValue);
-            formulaJson.clear();
-            formulaJson.put(formulaValue, formulaTestCase);
+        JSONArray methodObj = (JSONArray) formulaJson.get("preconditions");
+        if (!methodObj.isEmpty()) {
+            testClass.log("Necessary precondition/s " + methodObj.toString());
+            methodObj.forEach(methodName -> callPreconditions(methodName.toString()));
         }
-
-        formulaJson
+        JSONObject testCases = (JSONObject) formulaJson.get("testCases");
+        if (formulaValue != "All") {
+            JSONObject formulaTestCase = (JSONObject) testCases.get(formulaValue);
+            testCases.clear();
+            testCases.put(formulaValue, formulaTestCase);
+        }
+        testCases
                 .keySet()
                 .forEach(
                         key -> {
-                            JSONObject testCase = (JSONObject) formulaJson.get(key);
+                            JSONObject testCase = (JSONObject) testCases.get(key);
                             JSONObject teststeps = (JSONObject) testCase.get("data");
 
                             teststeps
@@ -258,15 +280,14 @@ public abstract class AbstractAssessmentPage extends AbstractPage {
                                                                 dependency
                                                                         .get(dependencyName)
                                                                         .toString());
-                                                    } catch (IOException e) {
-                                                        e.printStackTrace();
-                                                    } catch (ParseException e) {
+                                                    } catch (IOException | ParseException e) {
                                                         e.printStackTrace();
                                                     }
                                                 });
                             }
                             if (formulaValue == "All") {
                                 JSONObject expected = (JSONObject) testCase.get("expected");
+                                testClass.log("Formula value should be " + expected.get("value").toString() +  " " + expected.get("description").toString());
                                 if (formulaName.contains("CAP")) {
                                     checkCapTrigger(
                                             expected.get("nameOfFormula").toString(),

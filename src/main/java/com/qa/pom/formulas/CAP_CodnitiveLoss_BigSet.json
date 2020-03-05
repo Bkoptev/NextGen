@@ -1,0 +1,67 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Cognitive Loss CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iC1": 0,
+            "iC5": 0,
+            "iC2a": 0,
+            "iD1": 0,
+            "iD2": 0,
+            "iE1e": 0,
+            "iI1c": 0,
+            "iI1d": 0,
+            "iJ6c": 0,
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0,
+            "iE1h": 0,
+            "iE3a": 0,
+            "iE3c": 0,
+            "iG7b": 0,
+            "iG2j": 0,
+            "iR2": 0
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Cognitive Loss CAP",
+            "value": "2",
+            "description": "Triggered - prevent decline"
+         },
+         "data": {
+            "iC1": 0,
+            "iC5": 0,
+            "iC2a": 0,
+            "iD1": 0,
+            "iD2": 0,
+            "iE1e": 0,
+            "iI1c": 0,
+            "iI1d": 0,
+            "iJ6c": 0,
+            "iC3a": 2,
+            "iC3b": 2,
+            "iC3c": 2,
+            "iC4": 0,
+            "iE1h": 0,
+            "iE3a": 0,
+            "iE3c": 0,
+            "iG7b": 0,
+            "iG2j": 0,
+            "iR2": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

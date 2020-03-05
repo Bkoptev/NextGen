@@ -1,7 +1,7 @@
 package com.qa.pom.pages;
 
 import com.qa.pom.base.BaseTest;
-import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +13,10 @@ public class InterRAIChaFsMh extends AbstractAssessmentPage {
 
     @FindBy(xpath = "//div[@varname='FS']")
     private WebElement waitForElemUpload;
-    public JSONObject assessmentMap;
+
+    private String[] formulas = {""};
+
+    public JSONArray assessmentMap;
     /**
      * Constructor
      *
@@ -30,19 +33,17 @@ public class InterRAIChaFsMh extends AbstractAssessmentPage {
     public void loadAssessmentMap() {
         try {
             assessmentMap =
-                    (JSONObject) testClass.jsonParser
-                            .parse(
+                    (JSONArray)
+                            testClass.jsonParser.parse(
                                     new FileReader(
                                             "src/main/java/com/qa/pom/maps/"
                                                     + InterRAIChaFsMh.class.getSimpleName()
                                                     + ".json"));
             setAssessmentMap(assessmentMap);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }    catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
-
 }

@@ -1,0 +1,83 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "Pressure Ulcer CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iG2g": 0,
+            "iG2i": 0,
+            "iH2": 0,
+            "iL1": 0,
+            "iL2": 0,
+            "iL3": 0,
+            "iN2k": 0,
+            "iH1": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "Pressure Ulcer CAP",
+            "value": "1",
+            "description": "Triggered - Has Stage 2 Ulcer"
+         },
+         "data": {
+            "iG2g": 0,
+            "iG2i": 0,
+            "iH2": 0,
+            "iL1": 2,
+            "iL2": 0,
+            "iL3": 0,
+            "iN2k": 0,
+            "iH1": 0
+         },
+         "dependencies": {
+         }
+      },
+      "2": {
+         "expected": {
+            "nameOfFormula": "Pressure Ulcer CAP",
+            "value": "2",
+            "description": "Triggered - At Risk, has Stage 1 Ulcer"
+         },
+         "data": {
+            "iG2g": 0,
+            "iG2i": 0,
+            "iH2": 0,
+            "iL1": 1,
+            "iL2": 0,
+            "iL3": 0,
+            "iN2k": 0,
+            "iH1": 0
+         },
+         "dependencies": {
+         }
+      },
+      "3": {
+         "expected": {
+            "nameOfFormula": "Pressure Ulcer CAP",
+            "value": "3",
+            "description": "Triggered - At Risk, No Ulcer Now"
+         },
+         "data": {
+            "iG2g": 6,
+            "iG2i": 0,
+            "iH2": 2,
+            "iL1": 0,
+            "iL2": 0,
+            "iL3": 0,
+            "iN2k": 0,
+            "iH1": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

@@ -1,0 +1,37 @@
+{
+   "preconditions": [
+      "fsTriggered"
+   ],
+   "testCases": {
+      "0": {
+         "expected": {
+            "nameOfFormula": "DELIRIUM CAP",
+            "value": "0",
+            "description": "Not triggered"
+         },
+         "data": {
+            "iC3a": 0,
+            "iC3b": 0,
+            "iC3c": 0,
+            "iC4": 0
+         },
+         "dependencies": {
+         }
+      },
+      "1": {
+         "expected": {
+            "nameOfFormula": "DELIRIUM CAP",
+            "value": "1",
+            "description": "Triggered"
+         },
+         "data": {
+            "iC3a": 0,
+            "iC3b": 2,
+            "iC3c": 0,
+            "iC4": 0
+         },
+         "dependencies": {
+         }
+      }
+   }
+}

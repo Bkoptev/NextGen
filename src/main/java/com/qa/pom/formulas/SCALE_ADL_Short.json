@@ -1,0 +1,132 @@
+{
+    "preconditions":[
+    ],
+    "testCases":{
+        "0":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"0 out of 16",
+                "description":"No ADL Impairment"
+            },
+            "data":{
+                "iG2b":"0",
+                "iG2f":"0"
+            },
+            "dependencies":{
+
+            }
+        },
+        "1":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"1 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"2",
+                "iG2f":"0"
+            },
+            "dependencies":{
+
+            }
+        },
+        "2":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"3 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"2",
+                "iG2f":"2"
+            },
+            "dependencies":{
+
+            }
+        },
+        "3":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"3 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"3",
+                "iG2f":"2"
+            },
+            "dependencies":{
+
+            }
+        },
+        "4":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"4 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"4",
+                "iG2f":"2"
+            },
+            "dependencies":{
+
+            }
+        },
+        "5":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"5 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"6",
+                "iG2f":"2"
+            },
+            "dependencies":{
+
+            }
+        },
+        "6":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"6 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"6",
+                "iG2f":"3"
+            },
+            "dependencies":{
+
+            }
+        },
+        "7":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"7 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"6",
+                "iG2f":"4"
+            },
+            "dependencies":{
+
+            }
+        },
+        "8":{
+            "expected":{
+                "nameOfFormula":"Activities of Daily Living (ADL) Scale - Short Form",
+                "value":"8 out of 16",
+                "description":"Higher values indicate greater difficulty in performing activities"
+            },
+            "data":{
+                "iG2b":"6",
+                "iG2f":"6"
+            },
+            "dependencies":{
+
+            }
+        }
+    }
+}
